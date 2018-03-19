@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/index';
 
 
-class Searchbar extends Component {
+
+class Addbar extends Component {
 
     constructor(props) {
         super(props);
         
         this.state = {
             name: "",
-            status: true
+            status: false
         }
     }
 
@@ -29,11 +32,11 @@ class Searchbar extends Component {
     } 
 
     onAddNewTodo = ()=> {
-        this.props.onAddNewTodo(this.state.name, this.state.status);
+        this.props.onSaveTask(this.state);
         this.setState({
             name: "",
-            status: true
-        }); 
+            status: false
+        });
     }
 
     render() {
@@ -42,21 +45,17 @@ class Searchbar extends Component {
             <div>
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div className="input-group"
-                        onChange={ this.onChange }
-                    >
+                        onChange={ this.onChange } >
                         <input type="text" 
                                 placeholder="Add new todo" 
                                 className="form-control" 
                                 aria-describedby="search-box"
                                 value={ name }
-                                name="name"
-                        />
+                                name="name" />
                         <span className={ status === true ?  "input-group-addon addon-success" : "input-group-addon addon-danger" } 
-                            onClick={ this.onToggleStatus }
-                        > 
+                            onClick={ this.onToggleStatus } > 
                                 <span className={ status === true ? "label label-success" : "label label-danger"}
-                                    name="status"
-                                >
+                                    name="status" >
                                     { status === true ? "start" : "pending"}
                                 </span>
                         </span>
@@ -75,4 +74,18 @@ class Searchbar extends Component {
     }
 }
 
-export default Searchbar;
+const mapStateToProps = (data) => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) => {
+    return {
+        onSaveTask : task => {
+            dispatch(actions.saveTask(task));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Addbar);

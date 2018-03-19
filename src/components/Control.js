@@ -7,14 +7,11 @@ class Control extends Component {
     render() {
         return (
             <div>
-                
                 {/* Search bar */}
-                   <Addbar onAddNewTodo={ this.props.onAddNewTodo }/>
+                <Addbar />
                 {/* Sort */}
                 <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <Sort onSort={ this.props.onSort }
-                            sort={ this.props.sort }
-                    />
+                    <Sort />
                 </div>
             </div>
         );
